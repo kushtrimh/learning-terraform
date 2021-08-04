@@ -36,3 +36,11 @@ As you change Terraform configurations, Terraform builds an execution plan that 
 
 To destroy the infrastructure run ```terraform destroy```, which terminates the resources defined in the Terraform configuration.
 Terraform will destroy the resources in order, to respect dependencies.
+
+---
+
+Terraform loads all files in the current directory ending in .tf, so you can name your configuration files however you choose.
+
+We must apply the configuration, before we can use the _output_ values.
+
+Run ```terraform output``` to query the outputs after _apply_.
