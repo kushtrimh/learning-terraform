@@ -32,7 +32,7 @@ Run ```terraform state``` for advanced state management, ```terraform state list
 
 ---
 
-As you change Terraform configurations, Terraform builds an execution plan that only modifies what is necessary
+As you change Terraform configurations, Terraform builds an execution plan that only modifies what is necessary.
 
 To destroy the infrastructure run ```terraform destroy```, which terminates the resources defined in the Terraform configuration.
 Terraform will destroy the resources in order, to respect dependencies.
