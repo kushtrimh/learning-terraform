@@ -18,9 +18,9 @@ Use ```terraform apply``` to applly the configuration.
 _Apply_ will show the execution plan, which describes what actions Terraform will take in order to change the infrastructure to match the configuration.
 
 
-```+``` resource will be created
-```-``` resource will be destroyed
-```-/+``` resource will be destroyed and recreated
+* ```+``` resource will be created.
+* ```-``` resource will be destroyed.
+* ```-/+``` resource will be destroyed and recreated.
 
 Terraform stores the IDs and properties of the resources it manages in ```terraform.tfstate```, so it can update or destroy those resources going forward.
 This file contains sensitive information sometimes, so it must be stored securely and with restricted access to only the people that need to manage the infrastructure.
