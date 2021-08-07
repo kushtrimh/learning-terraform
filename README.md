@@ -44,3 +44,35 @@ Terraform loads all files in the current directory ending in .tf, so you can nam
 We must apply the configuration, before we can use the _output_ values.
 
 Run ```terraform output``` to query the outputs after _apply_.
+
+---
+
+Terraform is made of `Terraform core` and `Terraform plugins`
+
+* Terraform Core reads the configuration and builds the resource dependency graph.
+* Terraform Plugins (providers and provisioners) bridge Terraform Core and their respective target APIs. Terraform provider plugins implement resources via basic CRUD (create, read, update, and delete) APIs to communicate with third party services.
+
+---
+
+The `data` block retrieves additional information about a resource, which enables it to be referenced by another Terraform resource.
+
+Input values make the configuration more flexible, by defining values that the end user can use to customize thhe configuration. They allow the user to assign different values to variables before the executing begins, and are not changed during `plan`, `apply`, or `destroy`.
+
+Variables can be kept anywhere in the configuration files, but it is recommended to put them at `variables.tf` file.
+
+```hcl
+variable "aws_region" {
+    description = "AWS region"
+    type = string
+    default = "eu-central-1"
+}
+```
+
+Variables must be literal values, they cannot be computed.
+
+Refer using `var`
+
+```
+provider aws {
+    region = var.aws_region
+}
