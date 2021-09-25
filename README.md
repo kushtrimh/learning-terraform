@@ -76,3 +76,5 @@ Refer using `var`
 provider aws {
     region = var.aws_region
 }
+```
+
