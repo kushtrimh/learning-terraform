@@ -17,6 +17,7 @@ For formating use ```terraform fmt```, and for validation ```terraform validate`
 Use ```terraform apply``` to applly the configuration.
 _Apply_ will show the execution plan, which describes what actions Terraform will take in order to change the infrastructure to match the configuration.
 
+Terraform normally loads all of the .tf and .tf.json files within a directory and expects each one to define a distinct set of configuration objects. If two files attempt to define the same object, Terraform returns an error.
 
 * ```+``` resource will be created.
 * ```-``` resource will be destroyed.
@@ -78,3 +79,21 @@ provider aws {
 }
 ```
 
+---
+
+Use `depends_on` meta-argument to handle hidden resource or modules dependencies, that Terraform can not infer automatically. Specifying this meta-argument is neccessary only when a resource or module relies on some other resource's behavior but does not access any of its data in  its arguments.
+
+```HCL
+resource "aws_instance" "example" {
+  ami           = "some-ami"
+  instance_type = "t2.nano"
+
+  depends_on = [
+    aws_iam_role_policy.example,
+  ]
+}
+```
+
+Expressions not allowed on `depends_on`. Use it as a last restort, and always document its usage.
+
+---
