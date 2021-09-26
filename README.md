@@ -96,4 +96,44 @@ resource "aws_instance" "example" {
 
 Expressions not allowed on `depends_on`. Use it as a last restort, and always document its usage.
 
+Other meta-arguments:
+* count
+* for_each
+* providers
+* lifecycle
+
 ---
+
+Provisioners can be used to model specific actions on the local machine or on a remote machine in order to prepare servers or other infrastructure objects for service.
+
+Use provisioners as a last resort.
+
+Provisioners are used to execute scripts on a local or remote machine as part of resource creation or destruction. Provisioners can be used to bootstrap a resource, cleanup before destroy, run configuration management, etc.
+
+_If a creation-time provisioner fails, the resource is marked as tainted. A tainted resource will be planned for destruction and recreation upon the next terraform apply. Terraform does this because a failed provisioner can leave a resource in a semi-configured state. Because Terraform cannot reason about what the provisioner does, the only way to ensure proper creation of a resource is to recreate it. This is tainting._
+
+```HCL
+resource "aws_instance" "web" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "echo The server's IP address is ${self.private_ip}"
+  }
+}
+```
+
+---
+
+*Data sources* allow Terraform use information defined outside of Terraform, defined by another separate Terraform configuration, or modified by functions.
+
+```HCL
+data "aws_ami" "example" {
+  most_recent = true
+
+  owners = ["self"]
+  tags = {
+    Name   = "app-server"
+    Tested = "true"
+  }
+}
+```
